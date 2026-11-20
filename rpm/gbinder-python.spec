@@ -13,7 +13,9 @@ BuildRequires: gcc
 BuildRequires: libgbinder-devel libglibutil-devel pkgconfig
 
 Source: %{name}-%{version}.tar.gz
-%if 0%{sailfishos_version} <= 50000
+# Only for Cython before 3 (Sailfish OS up to 5.0). Where sailfishos_version is
+# not defined (the Platform SDK), the condition is false instead of a parse error.
+%if 0%{?sailfishos_version} && 0%{?sailfishos_version} <= 50000
 Patch0: 001-no-noexcept.patch
 %endif
 
